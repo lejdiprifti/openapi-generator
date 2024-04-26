@@ -4605,7 +4605,8 @@ public class DefaultCodegen implements CodegenConfig {
 		if (parameters != null) {
 			for (Parameter param : parameters) {
 
-				Map<String, Object> extensions = param.getExtensions();
+				Map<String, Object> extensions = Optional.ofNullable(param.getExtensions())
+						.orElseGet(Collections::emptyMap);
 				if (Boolean.TRUE.equals(extensions.get("x-codegen-ignore"))) {
 					continue;
 				}
