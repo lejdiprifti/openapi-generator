@@ -4604,6 +4604,12 @@ public class DefaultCodegen implements CodegenConfig {
 
 		if (parameters != null) {
 			for (Parameter param : parameters) {
+
+				Map<String, Object> extensions = param.getExtensions();
+				if (Boolean.TRUE.equals(extensions.get("x-codegen-ignore"))) {
+					continue;
+				}
+
 				param = ModelUtils.getReferencedParameter(this.openAPI, param);
 
 				CodegenParameter p = fromParameter(param, imports);
